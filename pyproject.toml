@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "janus-ssmm-tlm-info"
 version = "0.0.1"
-description = ""
+description = "Provides information on JANUS SSMM images content."
 authors = ["Luca Penasa <luca.penasa@inaf.it>"]
 license = "MIT"
 readme = "README.md"
