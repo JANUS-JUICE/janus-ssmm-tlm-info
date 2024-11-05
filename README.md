@@ -25,6 +25,10 @@ Provides information on JANUS SSMM images content.
 pip install janus-ssmm-tlm-info
 ```
 
+## Usage
+
+See [this notebook](notebooks/usage.ipynb) for an example of its public interface usage.
+
 ## Development
 
 * Clone this repository
