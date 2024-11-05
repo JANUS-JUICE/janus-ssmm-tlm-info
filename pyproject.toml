@@ -95,7 +95,6 @@ addopts = """\
     --cov tests \
     --cov-report term-missing \
     --no-cov-on-fail \
-    --nbmake \
 """
 
 [tool.coverage.report]
