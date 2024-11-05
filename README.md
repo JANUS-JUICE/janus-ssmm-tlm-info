@@ -5,6 +5,7 @@
 [![PyPI - License](https://img.shields.io/pypi/l/janus-ssmm-tlm-info?style=flat-square)](https://pypi.python.org/pypi/janus-ssmm-tlm-info/)
 [![Coookiecutter - Wolt](https://img.shields.io/badge/cookiecutter-Wolt-00c2e8?style=flat-square&logo=cookiecutter&logoColor=D4AA00&link=https://github.com/woltapp/wolt-python-package-cookiecutter)](https://github.com/woltapp/wolt-python-package-cookiecutter)
 
+Provides information on JANUS SSMM images content.
 
 ---
 
