@@ -29,10 +29,7 @@ packages = [{ include = "janus_ssmm_tlm_info", from = "src" }]
 python = ">=3.10, <4.0"
 importlib-metadata = "^8.5.0"
 loguru = "^0.7.2"
-# ccsdspy = {path = "../../ccsdspy.git", develop = true}
 spiceypy = "^6.0.0"
-ccsdspy = "^1.3.2"
-janus-package-helper = {path = "../../janus-package-helper", develop = true}
 construct = "^2.10.70"
 
 [tool.poetry.group.dev.dependencies]

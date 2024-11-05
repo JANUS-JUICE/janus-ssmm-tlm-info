@@ -111,23 +111,6 @@ docs = ["black", "markdown-customblocks", "mdx-truly-sane-lists", "mkdocs", "mkd
 test = ["coverage", "freezegun", "pre-commit", "pytest", "pytest-cov", "pytest-mock", "pytest-sugar"]
 
 [[package]]
-name = "ccsdspy"
-version = "1.3.2"
-description = "IO Interface for Reading CCSDS Data in Python."
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "ccsdspy-1.3.2.tar.gz", hash = "sha256:faff0703b47e5996fb6a718aa3b9924e9d6700b7b8d73cc5785597675ba76979"},
-]
-
-[package.dependencies]
-numpy = ">=1.8.0"
-
-[package.extras]
-dev = ["black (==22.10.0)", "coverage (>=6.5.0)", "coverage[toml]", "flake8 (>=5.0.4)", "pytest (>=7.1.3,<8.1.0)", "pytest-astropy", "pytest-cov"]
-docs = ["graphviz (>=0.20.1)", "numpydoc", "sphinx (>=5.2.3)", "sphinx-automodapi (>=0.14.1)"]
-
-[[package]]
 name = "certifi"
 version = "2024.8.30"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -796,19 +779,6 @@ parallel = ["ipyparallel"]
 qtconsole = ["qtconsole"]
 test = ["packaging", "pickleshare", "pytest", "pytest-asyncio (<0.22)", "testpath"]
 test-extra = ["curio", "ipython[test]", "matplotlib (!=3.2.0)", "nbformat", "numpy (>=1.23)", "pandas", "trio"]
-
-[[package]]
-name = "janus-package-helper"
-version = "0.1.0"
-description = ""
-optional = false
-python-versions = ">=3.8"
-files = []
-develop = true
-
-[package.source]
-type = "directory"
-url = "../../janus-package-helper"
 
 [[package]]
 name = "jedi"
@@ -2976,4 +2946,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10, <4.0"
-content-hash = "165264afb8a05d00344d3c93494754cbbd3248ccd7e63aa721b004e5b4a61810"
+content-hash = "cc1f63e27adc41ff0a16e43732786aad3f21dc3757f129dcd2c40cf276c30ad9"
