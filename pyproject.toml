@@ -56,6 +56,7 @@ ipykernel = "^6.29.5"
 nbmake = ">=1.4.6"
 bump-my-version = "^0.27.0"
 rust-just = "^1.36.0"
+planetary-coverage = "^1.1.1"
 
 
 
@@ -102,7 +103,6 @@ classmethod-decorators = [
 [tool.pytest.ini_options]
 addopts = """\
     --cov janus_ssmm_tlm_info \
-    --cov tests \
     --cov-report term-missing \
     --no-cov-on-fail \
 """
