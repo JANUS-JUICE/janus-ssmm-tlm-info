@@ -17,8 +17,6 @@ Provides information on JANUS SSMM images content.
 
 ---
 
-
-
 ## Installation
 
 ```sh
@@ -29,19 +27,31 @@ pip install janus-ssmm-tlm-info
 
 See [this notebook](notebooks/usage.ipynb) for an example of its public interface usage.
 
+### CLI
+
+The module also provides a cli that can be used in this way:
+
+```bash
+janus-ssmm-tlm-info /data/JANUS_ADMIN_ARCHIVE_SSH/JANUS_RAW_ARCHIVE/00_-_REM/GRM_32/20230209/230209_3_EM_ASW32_IdaPeu_FpiSpike/janus_2023-02-09_114104_ssmm1_0x37_0001.bin -m /data/JUICE.git/kernels/mk/juice_ops_local.tm
+```
+
+## Limitations
+
+- [ ] Currently the implementation does not estimate correct times for GRM-generated telemetry which are just unix timestamps and should be treated as such. To be implemented.
+
 ## Development
 
-* Clone this repository
-* Requirements:
-  * [Poetry](https://python-poetry.org/)
-  * Python 3.10+
-* Create a virtual environment and install the dependencies
+- Clone this repository
+- Requirements:
+  - [Poetry](https://python-poetry.org/)
+  - Python 3.10+
+- Create a virtual environment and install the dependencies
 
 ```sh
 poetry install
 ```
 
-* Activate the virtual environment
+- Activate the virtual environment
 
 ```sh
 poetry shell
@@ -57,8 +67,6 @@ pytest
 
 The documentation is automatically generated from the content of the [docs directory](https://github.com/JANUS-JUICE/janus-ssmm-tlm-info/tree/master/docs) and from the docstrings
  of the public signatures of the source code. The documentation is updated and published as a [Github Pages page](https://pages.github.com/) automatically as part each release.
-
-
 
 ### Releasing
 
@@ -79,8 +87,8 @@ as the CI is not yet configured for publish on pypi it can be done by hand:
 ```bash
 poetry publish --build
 ```
-#### Automatic release - to be fixed
 
+#### Automatic release - to be fixed
 
 Trigger the [Draft release workflow](https://github.com/JANUS-JUICE/janus-ssmm-tlm-info/actions/workflows/draft_release.yml)
 (press _Run workflow_). This will update the changelog & version and create a GitHub release which is in _Draft_ state.
@@ -93,6 +101,7 @@ Find the draft release from the
 ### Updating with copier
 
 To update the skeleton of the project using copier:
+
 ```sh
  pipx run copier update --defaults
 ```

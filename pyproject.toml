@@ -31,6 +31,14 @@ importlib-metadata = "^8.5.0"
 loguru = "^0.7.2"
 spiceypy = "^6.0.0"
 construct = "^2.10.70"
+click = {version="^8.1.7", optional=true}
+
+[tool.poetry.extras]
+cli = ["click"]
+
+[tool.poetry.scripts]
+janus-ssmm-tlm-info = 'janus_ssmm_tlm_info.cli:main'
+
 
 [tool.poetry.group.dev.dependencies]
 mkdocstrings = { version = ">=0.23", extras = ["python"] }
@@ -48,6 +56,8 @@ ipykernel = "^6.29.5"
 nbmake = ">=1.4.6"
 bump-my-version = "^0.27.0"
 rust-just = "^1.36.0"
+
+
 
 [build-system]
 requires = ["poetry-core"]

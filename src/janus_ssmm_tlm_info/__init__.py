@@ -1,6 +1,6 @@
-import importlib
+import importlib_metadata
 
-__version__ = importlib.metadata.version("janus_ssmm_tlm_info")
+__version__ = importlib_metadata.version("janus_ssmm_tlm_info")
 
 
 from .packets import ssm_file_info

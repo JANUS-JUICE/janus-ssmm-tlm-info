@@ -1,4 +1,3 @@
-from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
 
@@ -44,7 +43,7 @@ def ssm_file_info(file: Path | str) -> _SSMMFileInfo:
 
     from janus_ssmm_tlm_info.time import coarse_fine_to_datetime
 
-    utc = [coarse_fine_to_datetime(c, f) for c, f in zip(coarse, fine)]
+    utc = [coarse_fine_to_datetime(c, f) for c, f in zip(coarse, fine, strict=False)]
 
     start_time = min(utc)
     end_time = max(utc)
@@ -52,10 +51,10 @@ def ssm_file_info(file: Path | str) -> _SSMMFileInfo:
     npacks = len(ssmm.packets)
 
     return {
-        "apids": apids,
-        "npacks": npacks,
         "file_name": file.name,
+        "npacks": npacks,
+        "apids": apids,
+        "sessions": sessions,
         "start_time": start_time.isoformat(),
         "end_time": end_time.isoformat(),
-        "sessions": sessions,
     }
