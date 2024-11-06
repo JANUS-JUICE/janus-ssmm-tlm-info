@@ -16,3 +16,23 @@ def splitted_B() -> Path:
 
 def joined() -> Path:
     return Path(__file__).parent / "JAN2_4700000AB_joined"
+
+
+def small_test_data() -> Path:
+    return Path(__file__).parent / "test.bin"
+
+
+from planetary_coverage import TourConfig
+
+
+def pytest_cache_dir() -> Path:
+    return Path(__file__).parent.parent.parent / ".pytest_cache"
+
+def tour_config() -> TourConfig:
+    return TourConfig(
+        instrument="JUICE_JANUS",
+        download_kernels=True,
+        kernels_dir=pytest_cache_dir() / "spice_kernels",
+        load_kernels=True,
+        mk="ops",
+    )

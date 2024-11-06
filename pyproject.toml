@@ -106,6 +106,7 @@ addopts = """\
     --cov-report term-missing \
     --no-cov-on-fail \
 """
+cache_dir = ".pytest-cache"
 
 [tool.coverage.report]
 fail_under = 70 # relaxed coverage
