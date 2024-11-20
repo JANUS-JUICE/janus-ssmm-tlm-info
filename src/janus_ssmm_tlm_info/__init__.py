@@ -1,4 +1,4 @@
-import importlib
+import importlib.metadata
 
 __version__ = importlib.metadata.version("janus_ssmm_tlm_info")
 
