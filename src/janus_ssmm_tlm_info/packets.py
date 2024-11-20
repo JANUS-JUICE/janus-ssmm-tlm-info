@@ -45,8 +45,12 @@ def ssm_file_info(file: Path | str) -> _SSMMFileInfo:
 
     utc = [coarse_fine_to_datetime(c, f) for c, f in zip(coarse, fine, strict=False)]
 
-    start_time = min(utc)
-    end_time = max(utc)
+    if len(utc) > 0:
+        start_time = min(utc).isoformat()
+        end_time = max(utc).isoformat()
+    else:
+        start_time = None
+        end_time = None
 
     npacks = len(ssmm.packets)
 
@@ -55,6 +59,6 @@ def ssm_file_info(file: Path | str) -> _SSMMFileInfo:
         "npacks": npacks,
         "apids": apids,
         "sessions": sessions,
-        "start_time": start_time.isoformat(),
-        "end_time": end_time.isoformat(),
+        "start_time": start_time,
+        "end_time": end_time,
     }

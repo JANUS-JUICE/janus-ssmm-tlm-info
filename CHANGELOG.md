@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+### Added
+- ability to parse multiple ssmm files from cli
+- fix error when an image is empty
+
 ## 0.0.5 - 2024-11-20
 
 ## 0.0.4 - 2024-11-06
