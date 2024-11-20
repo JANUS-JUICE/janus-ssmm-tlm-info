@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 0.0.5 - 2024-11-20
+
 ## 0.0.4 - 2024-11-06
 ### Fixed
 - Improved test and test coverage with a small test suite

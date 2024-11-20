@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "janus-ssmm-tlm-info"
-version = "0.0.4"
+version = "0.0.5"
 description = "Provides information on JANUS SSMM images content."
 authors = ["Luca Penasa <luca.penasa@inaf.it>"]
 license = "MIT"
@@ -134,7 +134,7 @@ disallow_any_unimported = true
 # ]
 # disallow_untyped_defs = false
 [tool.bumpversion]
-current_version = "0.0.4"  # Replace with your current version
+current_version = "0.0.5"  # Replace with your current version
 
 
 [[tool.bumpversion.files]]
