@@ -54,6 +54,7 @@ dev = [
     "bump-my-version>=0.27.0,<0.28",
     "rust-just>=1.36.0,<2",
     "planetary-coverage>=1.1.1,<2",
+    "mkdocs>=1.6.1",
 ]
 
 [tool.hatch.build.targets.sdist]
@@ -122,10 +123,3 @@ exclude_lines = ['if TYPE_CHECKING:', 'pragma: no cover']
 strict = true                  # See all the enabled flags `mypy --help | grep -A 10 'Strict mode'`
 disallow_any_unimported = true
 
-[tool.bumpversion]
-current_version = "0.0.6"  # Replace with your current version
-
-[[tool.bumpversion.files]]
-filename = "pyproject.toml"
-search = 'version = "{current_version}"'
-replace = 'version = "{new_version}"'

@@ -23,18 +23,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]  # Add operating systems
-        python-version: ["3.10"]  # Add Python versions to matrix
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/python-poetry-env
+      - uses: astral-sh/setup-uv@v6 
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: poetry run pytest
+      - name: Run tests
+        run: uv run pytest
 
   docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/python-poetry-env
-      - run: poetry run mkdocs build
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build docs
+        run: uv run mkdocs build
