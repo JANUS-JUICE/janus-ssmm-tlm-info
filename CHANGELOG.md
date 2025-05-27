@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 0.0.7 - 2025-05-27
+
 ## 0.0.6 - 2024-11-20
 ### Added
 - ability to parse multiple ssmm files from cli
