@@ -1,15 +1,11 @@
-[tool.poetry]
+[project]
 name = "janus-ssmm-tlm-info"
-version = "0.0.6"
+version = "0.0.7"
 description = "Provides information on JANUS SSMM images content."
-authors = ["Luca Penasa <luca.penasa@inaf.it>"]
-license = "MIT"
+authors = [{ name = "Luca Penasa", email = "luca.penasa@inaf.it" }]
+requires-python = ">=3.10, <4.0"
 readme = "README.md"
-
-documentation = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
-homepage = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
-repository = "https://github.com/JANUS-JUICE/janus-ssmm-tlm-info"
-
+license = "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -22,47 +18,56 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
 ]
+dependencies = [
+    "importlib-metadata>=8.5.0,<9",
+    "loguru>=0.7.2,<0.8",
+    "spiceypy>=6.0.0,<7",
+    "construct>=2.10.70,<3",
+]
 
-packages = [{ include = "janus_ssmm_tlm_info", from = "src" }]
+[project.optional-dependencies]
+cli = ["click>=8.1.7,<9"]
 
-[tool.poetry.dependencies]
-python = ">=3.10, <4.0"
-importlib-metadata = "^8.5.0"
-loguru = "^0.7.2"
-spiceypy = "^6.0.0"
-construct = "^2.10.70"
-click = {version="^8.1.7", optional=true}
+[project.urls]
+Homepage = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
+Repository = "https://github.com/JANUS-JUICE/janus-ssmm-tlm-info"
+Documentation = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
 
-[tool.poetry.extras]
-cli = ["click"]
+[project.scripts]
+janus-ssmm-tlm-info = "janus_ssmm_tlm_info.cli:main"
 
-[tool.poetry.scripts]
-janus-ssmm-tlm-info = 'janus_ssmm_tlm_info.cli:main'
+[dependency-groups]
+dev = [
+    "mkdocstrings[python]>=0.23",
+    "mkdocs-material",
+    "mypy",
+    "pre-commit",
+    "pymdown-extensions",
+    "pytest",
+    "pytest-github-actions-annotate-failures",
+    "pytest-cov",
+    "pytest-sugar>=1.0.0,<2",
+    "python-kacl",
+    "ruff>=0.2.0",
+    "ipykernel>=6.29.5,<7",
+    "nbmake>=1.4.6",
+    "bump-my-version>=0.27.0,<0.28",
+    "rust-just>=1.36.0,<2",
+    "planetary-coverage>=1.1.1,<2",
+]
 
+[tool.hatch.build.targets.sdist]
+include = ["src/janus_ssmm_tlm_info"]
 
-[tool.poetry.group.dev.dependencies]
-mkdocstrings = { version = ">=0.23", extras = ["python"] }
-mkdocs-material = "*"
-mypy = "*"
-pre-commit = "*"
-pymdown-extensions = "*"
-pytest = "*"
-pytest-github-actions-annotate-failures = "*"
-pytest-cov = "*"
-pytest-sugar = "^1.0.0"
-python-kacl = "*"
-ruff = ">=0.2.0"
-ipykernel = "^6.29.5"
-nbmake = ">=1.4.6"
-bump-my-version = "^0.27.0"
-rust-just = "^1.36.0"
-planetary-coverage = "^1.1.1"
+[tool.hatch.build.targets.wheel]
+include = ["src/janus_ssmm_tlm_info"]
 
-
+[tool.hatch.build.targets.wheel.sources]
+"src/janus_ssmm_tlm_info" = "janus_ssmm_tlm_info"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.ruff]
 target-version = "py310" # The lowest supported version
@@ -106,7 +111,6 @@ addopts = """\
     --cov-report term-missing \
     --no-cov-on-fail \
 """
-    
 
 [tool.coverage.report]
 fail_under = 70 # relaxed coverage
@@ -118,24 +122,8 @@ exclude_lines = ['if TYPE_CHECKING:', 'pragma: no cover']
 strict = true                  # See all the enabled flags `mypy --help | grep -A 10 'Strict mode'`
 disallow_any_unimported = true
 
-# If you need to ignore something for some specific module,
-# add overrides for them. Avoid changing the global config!
-# For example:
-# [[tool.mypy.overrides]]
-# module = [
-#  "my_unpyted_dependency1.*",
-#  "my_unpyted_dependency2.*"
-# ]
-# ignore_missing_imports = true
-
-# [[tool.mypy.overrides]]
-# module = [
-#   "tests/my_thing/test_my_thing",
-# ]
-# disallow_untyped_defs = false
 [tool.bumpversion]
 current_version = "0.0.6"  # Replace with your current version
-
 
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
