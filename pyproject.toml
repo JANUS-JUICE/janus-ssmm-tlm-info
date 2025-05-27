@@ -20,13 +20,12 @@ classifiers = [
 ]
 dependencies = [
     "importlib-metadata>=8.5.0,<9",
-    "loguru>=0.7.2,<0.8",
-    "spiceypy>=6.0.0,<7",
-    "construct>=2.10.70,<3",
+    "loguru>=0.7.2",
+    "spiceypy>=6.0.0",
+    "construct>=2.10.70",
+    "click>=8.1.7"
 ]
 
-[project.optional-dependencies]
-cli = ["click>=8.1.7,<9"]
 
 [project.urls]
 Homepage = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
