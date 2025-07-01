@@ -1,9 +1,24 @@
+from enum import Enum, StrEnum
 from pathlib import Path
 from typing import TypedDict
 
 import numpy as np
 
 from janus_ssmm_tlm_info.janus_pkt import SSMM
+from loguru import logger as log
+
+class KNOWN_PEUS_VERSION(StrEnum):
+    """Known PEU versions."""
+
+    JANUS = "JANUS"
+    SIS = "SIS"
+
+
+
+PEU_VERSION_REGISTRY = {
+    "0x48a": KNOWN_PEUS_VERSION.JANUS,
+    "0x458": KNOWN_PEUS_VERSION.SIS,
+}
 
 
 class _SSMMFileInfo(TypedDict):
@@ -16,6 +31,7 @@ class _SSMMFileInfo(TypedDict):
     npacks: int
     apids: list[int]
     sessions: list[int]
+    source: str
 
 
 def ssm_file_info(file: Path | str, use_spice: bool = True) -> _SSMMFileInfo:
@@ -32,6 +48,20 @@ def ssm_file_info(file: Path | str, use_spice: bool = True) -> _SSMMFileInfo:
     file = Path(file)  # ensure is a path
 
     ssmm = SSMM.parse_file(file)
+
+    source = determine_peu_source(ssmm)
+
+    if source is None:
+        raise ValueError(
+            f"Unknown PEU source for file {file.name}. "
+            "Please check the PEU version registry."
+        )
+    
+    if source == KNOWN_PEUS_VERSION.JANUS and not use_spice:
+        log.warning(
+            "Janus PEU requires SPICE for time conversion. "
+            "Please set use_spice=True."
+        )
 
     apids = np.unique(ssmm.search_all("APID")).tolist()
     sessions = ssmm.search_all("SESSION_ID")
@@ -62,8 +92,8 @@ def ssm_file_info(file: Path | str, use_spice: bool = True) -> _SSMMFileInfo:
         start_time = min(utc).isoformat()
         end_time = max(utc).isoformat()
     else:
-        start_time = None
-        end_time = None
+        start_time = ""
+        end_time = ""
 
     npacks = len(ssmm.packets)
 
@@ -75,4 +105,14 @@ def ssm_file_info(file: Path | str, use_spice: bool = True) -> _SSMMFileInfo:
         "sessions": usessions,
         "start_time": start_time,
         "end_time": end_time,
+        "source": str(source),
     }
+
+
+def determine_peu_source(ssmm_parsed: SSMM) -> KNOWN_PEUS_VERSION | None:
+    """Check if the file is a flight data file.
+    Return None if it is an unknown PEU version.
+    """
+
+    version = hex(ssmm_parsed.search('H_Version'))
+    return PEU_VERSION_REGISTRY.get(version, None)
