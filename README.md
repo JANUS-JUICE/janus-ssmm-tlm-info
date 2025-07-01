@@ -5,7 +5,6 @@
 [![PyPI - License](https://img.shields.io/pypi/l/janus-ssmm-tlm-info?style=flat-square)](https://pypi.python.org/pypi/janus-ssmm-tlm-info/)
 [![Coookiecutter - Wolt](https://img.shields.io/badge/cookiecutter-Wolt-00c2e8?style=flat-square&logo=cookiecutter&logoColor=D4AA00&link=https://github.com/woltapp/wolt-python-package-cookiecutter)](https://github.com/woltapp/wolt-python-package-cookiecutter)
 
-Provides information on JANUS SSMM images content.
 
 ---
 
@@ -17,56 +16,39 @@ Provides information on JANUS SSMM images content.
 
 ---
 
+
+
 ## Installation
 
 ```sh
 pip install janus-ssmm-tlm-info
 ```
 
-## Usage
-
-See [this notebook](notebooks/usage.ipynb) for an example of its public interface usage.
-
-### CLI
-
-The module also provides a cli that can be used in this way:
-
-```bash
-janus-ssmm-tlm-info /data/JANUS_ADMIN_ARCHIVE_SSH/JANUS_RAW_ARCHIVE/00_-_REM/GRM_32/20230209/230209_3_EM_ASW32_IdaPeu_FpiSpike/janus_2023-02-09_114104_ssmm1_0x37_0001.bin -m /data/JUICE.git/kernels/mk/juice_ops_local.tm
-```
-
-## Limitations
-
-- [ ] Currently the implementation does not estimate correct times for GRM-generated telemetry which are just unix timestamps and should be treated as such. To be implemented.
-
 ## Development
 
-- Clone this repository
-- Requirements:
-  - [Poetry](https://python-poetry.org/)
-  - Python 3.10+
-- Create a virtual environment and install the dependencies
+* Clone this repository
+* Requirements:
+  * [uv](https://docs.astral.sh/uv/)
+  * Python 3.10+
+* Create a virtual environment and install the dependencies
 
 ```sh
-poetry install
+uv sync
 ```
 
-- Activate the virtual environment
-
-```sh
-poetry shell
-```
 
 ### Testing
 
 ```sh
-pytest
+uv run pytest
 ```
 
 ### Documentation
 
 The documentation is automatically generated from the content of the [docs directory](https://github.com/JANUS-JUICE/janus-ssmm-tlm-info/tree/master/docs) and from the docstrings
  of the public signatures of the source code. The documentation is updated and published as a [Github Pages page](https://pages.github.com/) automatically as part each release.
+
+
 
 ### Releasing
 
@@ -75,7 +57,7 @@ The documentation is automatically generated from the content of the [docs direc
 Releases are done with the command, e.g. incrementing patch:
 
 ```bash
-poetry run just bump patch
+uv run just bump patch
 # also push, of course:
 git push origin main --tags
 ```
@@ -85,10 +67,11 @@ this will update the changelog, commit it, and make a corresponding tag.
 as the CI is not yet configured for publish on pypi it can be done by hand:
 
 ```bash
-poetry publish --build
+uv build
+uv publish --build path/to/wheel
 ```
-
 #### Automatic release - to be fixed
+
 
 Trigger the [Draft release workflow](https://github.com/JANUS-JUICE/janus-ssmm-tlm-info/actions/workflows/draft_release.yml)
 (press _Run workflow_). This will update the changelog & version and create a GitHub release which is in _Draft_ state.
@@ -101,9 +84,8 @@ Find the draft release from the
 ### Updating with copier
 
 To update the skeleton of the project using copier:
-
 ```sh
- pipx run copier update --defaults
+uvx copier update --defaults
 ```
 
 ### Pre-commit

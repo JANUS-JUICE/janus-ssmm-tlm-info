@@ -6,6 +6,7 @@ authors = [{ name = "Luca Penasa", email = "luca.penasa@inaf.it" }]
 requires-python = ">=3.10, <4.0"
 readme = "README.md"
 license = "MIT"
+
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -15,6 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
 ]
@@ -26,12 +28,10 @@ dependencies = [
     "click>=8.1.7"
 ]
 
-
 [project.urls]
-Homepage = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
-Repository = "https://github.com/JANUS-JUICE/janus-ssmm-tlm-info"
-Documentation = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
-
+documentation = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
+homepage = "https://JANUS-JUICE.github.io/janus-ssmm-tlm-info"
+repository = "https://github.com/JANUS-JUICE/janus-ssmm-tlm-info"
 [project.scripts]
 janus-ssmm-tlm-info = "janus_ssmm_tlm_info.cli:main"
 
@@ -50,7 +50,6 @@ dev = [
     "ruff>=0.2.0",
     "ipykernel>=6.29.5,<7",
     "nbmake>=1.4.6",
-    "bump-my-version>=0.27.0,<0.28",
     "rust-just>=1.36.0,<2",
     "planetary-coverage>=1.1.1,<2",
     "mkdocs>=1.6.1",
