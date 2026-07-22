@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 0.0.10 - 2026-07-22
+
 ### Added
 
 - SPICE kernels are now auto-loaded via [`quick-spice-manager`](https://pypi.org/project/quick-spice-manager/) (`QuickSpiceManager(mk="ops")`) when `--metakernel` is left unset: kernels are fetched/furnished lazily and only once, and only when a file's PEU source (e.g. JANUS) actually requires SPICE for time conversion
