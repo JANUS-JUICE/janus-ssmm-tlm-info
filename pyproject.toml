@@ -25,7 +25,9 @@ dependencies = [
     "loguru>=0.7.2",
     "spiceypy>=6.0.0",
     "construct>=2.10.70",
-    "click>=8.1.7"
+    "click>=8.1.7",
+    "pandas>=2.0.0",
+    "rich>=15.0.0",
 ]
 
 [project.urls]
