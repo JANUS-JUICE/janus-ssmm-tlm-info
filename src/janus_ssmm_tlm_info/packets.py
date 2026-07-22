@@ -8,6 +8,11 @@ from construct.lib import Container, ListContainer
 from loguru import logger as log
 
 from janus_ssmm_tlm_info.janus_pkt import SSMM, SciPacket
+from janus_ssmm_tlm_info.time import (
+    coarse_fine_to_datetime,
+    coarse_fine_to_datetime_rem,
+    ensure_ops_kernels_loaded,
+)
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -113,7 +118,7 @@ def first_and_last_packets(file: Path) -> tuple[tuple[Container, ...], int]:
 
 def ssm_file_info(
     file: Path | str,
-    use_spice: bool = True,
+    use_spice: bool | None = True,
     quick: bool = False,
 ) -> _SSMMFileInfo:
     """Retrieve information on the content of a SSMM file.
@@ -122,6 +127,11 @@ def ssm_file_info(
         file: Path to the input SSMM file.
         use_spice: Convert on-board times to UTC via SPICE (requires a metakernel
             to already be furnished). If ``False``, times are treated as raw.
+            If ``None``, auto-detect from the file's PEU source: SPICE is
+            required (and the standard 'ops' kernels are lazily loaded via
+            :func:`~janus_ssmm_tlm_info.time.ensure_ops_kernels_loaded` if
+            needed) only for sources that require it (e.g. JANUS); other
+            sources fall back to raw timestamps.
         quick: If ``True``, only the file's first and last packets are parsed
             (see :func:`first_and_last_packets`) instead of every packet. This
             is much faster on large files but ``nimages``, ``apids`` and
@@ -133,7 +143,8 @@ def ssm_file_info(
         dictionary: info on the provided ssmm file.
 
     Notes:
-    Needs spice kernel to be already loaded to perform sc-time to utc conversion.
+    Needs spice kernel to be already loaded to perform sc-time to utc conversion,
+    unless ``use_spice=None`` (see above).
     Unless ``quick`` is set, it is slow as it reads all packets.
     """
 
@@ -158,6 +169,11 @@ def ssm_file_info(
         )
         raise ValueError(msg)
 
+    if use_spice is None:
+        use_spice = source == KNOWN_PEUS_VERSION.JANUS
+        if use_spice:
+            ensure_ops_kernels_loaded()
+
     if source == KNOWN_PEUS_VERSION.JANUS and not use_spice:
         log.warning(
             "Janus PEU requires SPICE for time conversion. Please set use_spice=True.",
@@ -175,11 +191,6 @@ def ssm_file_info(
     im_counts = ssmm.search_all("IMG_COUNT")
 
     n_images = len(set(zip(sessions, im_counts, strict=False)))
-
-    from janus_ssmm_tlm_info.time import (
-        coarse_fine_to_datetime,
-        coarse_fine_to_datetime_rem,
-    )
 
     if use_spice:
         time_converter = coarse_fine_to_datetime

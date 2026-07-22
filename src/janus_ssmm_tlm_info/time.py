@@ -1,7 +1,22 @@
 import datetime
 
-
 import spiceypy
+from quick_spice_manager import QuickSpiceManager
+
+_ops_kernels_manager: QuickSpiceManager | None = None
+
+
+def ensure_ops_kernels_loaded() -> None:
+    """Load the standard 'ops' metakernel via QuickSpiceManager, once per process.
+
+    No-op on subsequent calls: kernel loading is expensive, and once the
+    'ops' kernels are furnished they cover any time in the mission for which
+    on-board time conversion is needed.
+    """
+    global _ops_kernels_manager  # noqa: PLW0603 - lazy process-wide singleton
+    if _ops_kernels_manager is None:
+        _ops_kernels_manager = QuickSpiceManager(mk="ops")
+        _ops_kernels_manager.load_kernels()
 
 
 def coarse_fine_to_datetime(coarse: int, fine: int) -> datetime.datetime:

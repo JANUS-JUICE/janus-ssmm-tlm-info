@@ -164,10 +164,12 @@ def main(
         spiceypy.furnsh(str(metakernel))
         use_spice = True
     else:
-        log.warning(
-            "No metakernel provided, considering times as unix timestamps (i.e. data coming from GRM).",
+        log.info(
+            "No metakernel provided: SPICE kernels will be auto-loaded via "
+            "QuickSpiceManager(mk='ops') only if a file requires them "
+            "(e.g. JANUS PEU); other sources fall back to raw timestamps.",
         )
-        use_spice = False
+        use_spice = None
 
     allinfos = []
     for item in filename:
