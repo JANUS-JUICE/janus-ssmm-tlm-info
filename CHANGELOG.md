@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## 0.0.9 - 2026-07-22
+
 ### Added
 
 - `group_files_by_shared_images()`: groups SSMM files whose packets share at least one image (SESSION_ID, IMG_COUNT), for detecting when an image is split across multiple physical files
